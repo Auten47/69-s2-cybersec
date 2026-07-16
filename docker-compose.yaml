@@ -1,10 +1,10 @@
 services: 
   db:
-    image: postgres:16-alpine
+    image: postgres:latest
     container_name: 69-s2-admin
     ports:
-      - 5432:54322
+      - 54322:80
     environment:
-      - POSTGRES_PASSWORD=1234
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=P@ssw0rd
+      - POSTGRES_USER=then
+      # - POSTGRES_DB=postgres
