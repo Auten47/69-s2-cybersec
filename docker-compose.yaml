@@ -3,7 +3,7 @@ services:
     image: postgres:latest
     container_name: 69-s2-admin
     ports:
-      - 54322:80
+      - 8080:5432
     environment:
       - POSTGRES_PASSWORD=P@ssw0rd
       - POSTGRES_USER=then
