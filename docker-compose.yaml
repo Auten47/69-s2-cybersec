@@ -3,7 +3,7 @@ services:
     image: dpage/pgadmin4:latest
     container_name: 69-s2-admin
     ports:
-      - 80:5432
+      - 54321:80
     environment:
       - PGADMIN_DEFAULT_PASSWORD=P@ssw0rd
       - PGADMIN_DEFAULT_EMAIL=authen-c@rmutp.ac.th
