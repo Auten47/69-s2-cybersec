@@ -5,6 +5,6 @@ services:
     ports:
       - 8080:5432
     environment:
-      - POSTGRES_PASSWORD=P@ssw0rd
-      - POSTGRES_USER=then
+      - PGADMIN_DEFAULT_PASSWORD=P@ssw0rd
+      - PGADMIN_DEFAULT_EMAIL=authen-c@rmutp.ac.th
       # - POSTGRES_DB=postgres
