@@ -1,2 +1,6 @@
+# using environment in localhost
 .env
+# volumes of service postgres db
 data-postgres
+# volumes of service pgadmin4
+data-pgadmin
