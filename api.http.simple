@@ -1,0 +1,17 @@
+##REST
+
+##login
+POST http://localhost:9092/admin/login
+Content-Type: application/json
+
+{
+    "email": "",
+    "password": "",
+    "rememberMe": false
+}
+
+## Register
+
+## Forgot Password
+
+## Profile
