@@ -1,0 +1,33 @@
+#REST
+##login
+POST http://localhost:9092/admin/login
+Content-Type: application/json
+
+{
+    "email": "",
+    "password": "",
+    "rememberMe": false
+}
+
+###Register
+POST http://localhost:9092/admin/register-admin
+Content-Type: application/json
+
+    {
+        "email": "",
+        "firstname": "",
+        "lastname": "",
+        "password": ""
+    }
+###Forgot Password
+POST http://localhost:9092/admin/forgot-password
+Content-Type: application/json
+
+{
+    "email": ""
+}
+
+### Profile
+GET http://localhost:9092/admin/users/me
+authorization: Bearer 
+Content-Type: application/json
