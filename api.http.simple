@@ -1,5 +1,6 @@
 #REST
-##login
+# 1. Admin
+### 1.1 login
 POST http://localhost:9092/admin/login
 Content-Type: application/json
 
@@ -9,7 +10,7 @@ Content-Type: application/json
     "rememberMe": false
 }
 
-###Register
+### 1.2 Register
 POST http://localhost:9092/admin/register-admin
 Content-Type: application/json
 
@@ -19,7 +20,7 @@ Content-Type: application/json
         "lastname": "",
         "password": ""
     }
-###Forgot Password
+### 1.3 Forgot Password
 POST http://localhost:9092/admin/forgot-password
 Content-Type: application/json
 
@@ -27,7 +28,40 @@ Content-Type: application/json
     "email": ""
 }
 
-### Profile
+### 1.4 Profile
 GET http://localhost:9092/admin/users/me
 authorization: Bearer 
+Content-Type: application/json
+
+# 2. User
+### 2.1 login
+POST http://localhost:9092/api/auth/local/
+Content-Type: application/json
+
+{
+    "identifier": "",
+    "password": ""
+}
+
+### 2.2 Register
+POST http://localhost:9092/api/auth/local/register
+Content-Type: application/json
+
+{
+    "email": "",
+    "username": "",
+    "password": ""
+}
+
+### 2.3 Forgot Password
+POST http://localhost:9092/api/auth/forgot-password
+Content-Type: application/json
+
+{
+    "email": ""
+}
+
+### 2.4 Profile
+GET http://localhost:9092/api/users/me
+Authorization: Bearer 
 Content-Type: application/json
