@@ -1,1 +1,0 @@
-/usr/local/bin/postgres "-c" "listen_addresses=*" "-c" "log_connections=on" "-c" "log_disconnections=on" "-c" "log_duration=off" "-c" "log_line_prefix=%m [%u@%d pid=%p] "

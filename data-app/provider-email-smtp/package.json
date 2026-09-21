@@ -1,7 +1,0 @@
-{
-  "name": "@strapi/provider-email-smtp",
-  "version": "1.0.0",
-  "description": "Zero-dependency SMTP email provider for Strapi (MailHog compatible)",
-  "main": "index.js",
-  "license": "MIT"
-}
