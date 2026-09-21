@@ -1,0 +1,9 @@
+.env
+data-postgres
+data-pgadmin
+data-pgadmin-backup
+.vscode
+data-app
+api.http
+docker-compose.override.yml
+data-nginx
