@@ -1,33 +1,106 @@
 #REST
-##login
+
+## Variables
+@admin_email = {{$dotenv ADMIN_EMAIL}}
+@admin_password = {{$dotenv ADMIN_PASSWORD}}
+@admin_firstname = {{$dotenv ADMIN_FIRSTNAME}}
+@admin_lastname = {{$dotenv ADMIN_LASTNAME}}
+@user_firstname = {{$dotenv USER_FIRSTNAME}}
+@user_email = {{$dotenv USER_EMAIL}}
+@user_password = {{$dotenv USER_PASSWORD}}
+
+#1.Admin
+##1.1 login
 POST http://localhost:9092/admin/login
 Content-Type: application/json
 
 {
-    "email": "",
-    "password": "",
-    "rememberMe": false
+    "email": "{{admin_email}}",
+    "password": "{{admin_password}}",
+    "rememberMe": true
 }
 
-###Register
+### 1.2 Register
 POST http://localhost:9092/admin/register-admin
 Content-Type: application/json
 
     {
-        "email": "",
-        "firstname": "",
-        "lastname": "",
-        "password": ""
+        "email": "{{admin_email}}",
+        "firstname": "{{admin_firstname}}",
+        "lastname": "{{admin_lastname}}",
+        "password": "{{admin_password}}"
     }
-###Forgot Password
+
+### 1.3Forgot Password
+# Response is now 204 (no token returned).
+# The reset link is sent to the admin's email - view it in MailHog UI: http://localhost:8025
 POST http://localhost:9092/admin/forgot-password
 Content-Type: application/json
 
 {
-    "email": ""
+    "email": "{{admin_email}}"
 }
 
-### Profile
+### 1.3.1 Reset Password
+# resetPasswordToken = "code" query param from the reset link in the MailHog email
+# (token arrives in the email, not from .env)
+POST http://localhost:9092/admin/reset-password
+Content-Type: application/json
+
+{
+    "resetPasswordToken": "",
+    "password": "{{admin_password}}"
+}
+
+### 1.4 Profile
+# Paste an admin JWT below
 GET http://localhost:9092/admin/users/me
-authorization: Bearer 
+Authorization: Bearer <admin-jwt>
+Content-Type: application/json
+
+#2. User
+### 2.1 Login
+POST http://localhost:9092/api/auth/local/
+Content-Type: application/json
+
+{
+    "identifier": "{{user_email}}",
+    "password": "{{user_password}}"
+}
+
+### 2.2 Register
+POST http://localhost:9092/api/auth/local/register
+Content-Type: application/json
+
+{
+    "email": "{{user_email}}",
+    "username": "{{user_firstname}}",
+    "password": "{{user_password}}"
+}
+
+### 2.3 Forgot Password
+# Response is now 204 (no token returned).
+# The reset code is sent to the user's email - view it in MailHog UI: http://localhost:8025
+POST http://localhost:9092/api/auth/forgot-password
+Content-Type: application/json
+
+{
+    "email": "{{user_email}}"
+}
+
+### 2.3.1 Reset Password
+# code = the reset code shown in the MailHog email
+POST http://localhost:9092/api/auth/reset-password
+Content-Type: application/json
+
+{
+    "code": "<code-from-email>",
+    "password": "{{user_password}}",
+    "passwordConfirmation": "{{user_password}}"
+}
+
+### 2.4 Profile
+# Paste a user JWT below
+GET http://localhost:9092/api/users/me
+Authorization: Bearer <user-jwt>
 Content-Type: application/json

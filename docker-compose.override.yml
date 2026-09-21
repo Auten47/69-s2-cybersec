@@ -1,0 +1,48 @@
+services:
+  app:
+    user: root
+    command: >
+      sh -c "
+      rm -f /opt/app/.env &&
+      mkdir -p /opt/app/src/extensions/users-permissions/content-types/user &&
+      mkdir -p /opt/app/scripts &&
+      cp /srv/app/scripts/audit-verify.js /opt/app/scripts/audit-verify.js &&
+      cp /srv/app/src/extensions/users-permissions/audit.js /opt/app/src/extensions/users-permissions/audit.js &&
+      cp /srv/app/src/extensions/users-permissions/password.js /opt/app/src/extensions/users-permissions/password.js &&
+      cp /srv/app/src/extensions/users-permissions/login-lock.js /opt/app/src/extensions/users-permissions/login-lock.js &&
+      cp /srv/app/src/extensions/users-permissions/dbstore.js /opt/app/src/extensions/users-permissions/dbstore.js &&
+      cp /srv/app/src/extensions/users-permissions/otp.js /opt/app/src/extensions/users-permissions/otp.js &&
+      cp /srv/app/src/extensions/users-permissions/refresh-token.js /opt/app/src/extensions/users-permissions/refresh-token.js &&
+      cp /srv/app/src/extensions/users-permissions/strapi-server.js /opt/app/src/extensions/users-permissions/strapi-server.js &&
+      cp /srv/app/src/extensions/users-permissions/content-types/user/schema.json /opt/app/src/extensions/users-permissions/content-types/user/schema.json &&
+      cp /srv/app/config/plugins.js /opt/app/config/plugins.js &&
+      cp /srv/app/config/middlewares.js /opt/app/config/middlewares.js &&
+      mkdir -p /opt/app/src/middlewares &&
+      cp /srv/app/src/middlewares/rate-limit.js /opt/app/src/middlewares/rate-limit.js &&
+      mkdir -p /opt/app/src/api/auth-plus/routes /opt/app/src/api/auth-plus/controllers &&
+      cp /srv/app/src/api/auth-plus/routes/auth-plus.js /opt/app/src/api/auth-plus/routes/auth-plus.js &&
+      cp /srv/app/src/api/auth-plus/controllers/auth-plus.js /opt/app/src/api/auth-plus/controllers/auth-plus.js &&
+      mkdir -p /opt/node_modules/@strapi/provider-email-smtp &&
+      cp /srv/app/provider-email-smtp/package.json /srv/app/provider-email-smtp/index.js /opt/node_modules/@strapi/provider-email-smtp/ &&
+      rm -f /opt/node_modules/@strapi/admin/server/services/auth.js &&
+      cp /srv/app/patches/admin-auth-service.js /opt/node_modules/@strapi/admin/server/services/auth.js &&
+      rm -f /opt/node_modules/@strapi/admin/server/controllers/authentication.js &&
+      cp /srv/app/patches/admin-auth-controller.js /opt/node_modules/@strapi/admin/server/controllers/authentication.js &&
+      rm -f /opt/node_modules/@strapi/admin/server/controllers/authenticated-user.js &&
+      cp /srv/app/patches/admin-authenticated-user-controller.js /opt/node_modules/@strapi/admin/server/controllers/authenticated-user.js &&
+      rm -f /opt/node_modules/@strapi/admin/server/services/token.js &&
+      cp /srv/app/patches/admin-token.js /opt/node_modules/@strapi/admin/server/services/token.js &&
+      rm -f /opt/node_modules/@strapi/admin/server/services/user.js &&
+      cp /srv/app/patches/admin-user-service.js /opt/node_modules/@strapi/admin/server/services/user.js &&
+      rm -f /opt/node_modules/@strapi/admin/server/content-types/User.js &&
+      cp /srv/app/patches/admin-user-content-type.js /opt/node_modules/@strapi/admin/server/content-types/User.js &&
+      rm -f /opt/node_modules/@strapi/admin/server/strategies/admin.js &&
+      cp /srv/app/patches/admin-strategy.js /opt/node_modules/@strapi/admin/server/strategies/admin.js &&
+      rm -f /opt/node_modules/@strapi/plugin-users-permissions/server/strategies/users-permissions.js &&
+      cp /srv/app/patches/up-strategy.js /opt/node_modules/@strapi/plugin-users-permissions/server/strategies/users-permissions.js &&
+      rm -f /opt/node_modules/@strapi/plugin-users-permissions/server/controllers/user.js &&
+      cp /srv/app/patches/up-user-controller.js /opt/node_modules/@strapi/plugin-users-permissions/server/controllers/user.js &&
+      rm -f /opt/node_modules/@strapi/admin/server/routes/authentication.js &&
+      cp /srv/app/patches/admin-routes-authentication.js /opt/node_modules/@strapi/admin/server/routes/authentication.js &&
+      chown -R node:node /opt/app/src/extensions /opt/app/scripts &&
+      su -s /bin/sh node -c 'cd /opt/app && yarn start'"
